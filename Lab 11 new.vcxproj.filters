@@ -29,10 +29,10 @@
     <ClInclude Include="..\Lab 11\Array.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="outOfRange.h">
+    <ClInclude Include="..\Lab 11\Triad.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Lab 11\Triad.h">
+    <ClInclude Include="..\Lab 11\outOfRange.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
