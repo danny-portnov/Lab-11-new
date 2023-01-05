@@ -4,6 +4,8 @@
 #include <string>
 #include "Triad.h"
 #include "Array.h"
+#include "outOfRange.h"
+
 
 #ifdef _DEBUG
 #ifndef DBG_NEW
@@ -27,8 +29,8 @@ template <class T>
 void sort(T* arr, int n)
 // sort any array (of length n) of Sortable objects
 {
-	for(int i=0 ; i<n-1 ; i++) // selection sort
-		for(int j=i+1 ; j<n ; j++)
+	for (int i = 0; i < n - 1; i++) // selection sort
+		for (int j = i + 1; j < n; j++)
 			if ((arr[i] < arr[j])) //from "biggest" to "smallest"
 			{
 				my_swap(arr[i], arr[j]);
@@ -39,12 +41,12 @@ template <class T>
 void print_array(T* arr, int len)
 // print any array (of length n) of printable objects
 {
-	for (int i = 0; i<len; i++) cout << arr[i] << ' ';
+	for (int i = 0; i < len; i++) cout << arr[i] << ' ';
 }
 
 
 template <class T>
-void print_array(T& arr) 
+void print_array(T& arr)
 // print an object with len() method on operator []
 {
 	for (int i = 0; i < arr.len(); i++) cout << arr[i] << ' ';
@@ -103,45 +105,41 @@ void test_old_sort_traid_arr() {
 	cout << endl << endl;
 }
 //print Array object
-template <class T>
-void test_new_print_Array(T initialValue) {
-	Array<T> a(8);
+void test_new_print_Array() {
+	Array a(8);
 	for (int i = 0; i < 8; i++)
-		a[i] = initialValue++;
+		a[i] = i;
 	cout << "Print The Array:\n";
 	print_array(a);
 }
-template <class T>
-void test_new_sort_Array(T initialValue) {
+
+void test_new_sort_Array() {
 	//Sort a, and check "sorted" template for object with operator [] and len() method
-	Array<T> a(8);
+	Array a(8);
 	for (int i = 0; i < 8; i++)
-		a[i] = initialValue++;
+		a[i] = i;
 	sort(a);
 	cout << "Print Sorted Array:\n";
 	print_array(a);
 }
 //operator [] for non const Array
-template <class T>
-void test_operator_brackets_for_non_const(T valueToInsert) {
-	Array<T> a1(5);
-	a1[0] = valueToInsert;
+void test_operator_brackets_for_non_const() {
+	Array a1(5);
+	a1[0] = 3;
 	cout << a1[0] << endl; //prints 3
 }
 //operator [] for const Array, 'a2[0] = 3;' gives error!
-template <class T>
 void test_operator_brackets_for_const() {
-	const Array<T> a2(5);
+	const Array a2(5);
 	//a2[0] = 3; //is compilation error!
 	cout << a2[0] << endl; //prints 0
 }
 
 //swap two Arrays
-template <class T>
-void test_swap_arrays(T someValue) {
-	Array<T> a3(5);
-	Array<T> a1(5);
-	a3[0] = someValue;
+void test_swap_arrays() {
+	Array a3(5);
+	Array a1(5);
+	a3[0] = 6;
 	print_array(a3);
 	print_array(a1);
 	cout << "before" << endl;
@@ -153,41 +151,39 @@ void test_swap_arrays(T someValue) {
 
 void test_throw_string() {
 	try {
-		Array<int> a1(5);
-		a1[10] = 2; 
+		Array a1(5);
+		a1[10] = 2;
 	}
 	catch (string& str)
-	{ 
-		cout << str << endl; 
+	{
+		cout << str << endl;
+	}
+	catch (outOfRange& oor)
+	{
+		cout << oor.what() << endl;
 	}
 }
 
+#define LabVersion 11
 
 //---------------------------------------------------------------------
 int main(void)
 {
+#if LabVersion == 10
+	test_int_arr();
+	test_string_arr();
+	test_old_sort_traid_arr();
+	test_new_print_Array();
+	test_new_sort_Array();
+	test_operator_brackets_for_non_const();
+	test_operator_brackets_for_const();
+	test_swap_arrays();
+#elif LabVersion == 11 
+
+#endif // LabVersion == 10
 	test_throw_string();
-	test_new_print_Array<int>(0);
-	test_new_print_Array<char>('a'); //print an array of chars
-	test_new_print_Array<double(0); //print an array of chars
-
-	//test_old_sort_traid_arr();
-
-	test_new_sort_Array<int>(0);
-	test_new_sort_Array<char>('a');
-	test_new_sort_Array<double>(0);
-
-	test_operator_brackets_for_non_const(5);
-	test_operator_brackets_for_non_const('a');
-
-	test_operator_brackets_for_const<int>();
-	test_operator_brackets_for_const<char>();
-
-	test_swap_arrays<int>(5);
-	test_swap_arrays<char>('a');
-
 	cout << "Memory Leaks: " << _CrtDumpMemoryLeaks() << endl;
-	
+
 	return 0;
 }
 

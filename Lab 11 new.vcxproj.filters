@@ -27,18 +27,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Lab 11\Array.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lab 11\OutOfRange.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lab 11\Triad.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lab 10\Array.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Lab 10\Triad.h">
+    <ClInclude Include="outOfRange.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lab 11\Triad.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

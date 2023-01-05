@@ -132,10 +132,8 @@
     <ClCompile Include="..\Lab 11\Triad.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Lab 10\Array.h" />
-    <ClInclude Include="..\Lab 10\Triad.h" />
     <ClInclude Include="..\Lab 11\Array.h" />
-    <ClInclude Include="..\Lab 11\OutOfRange.h" />
+    <ClInclude Include="outOfRange.h" />
     <ClInclude Include="..\Lab 11\Triad.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
