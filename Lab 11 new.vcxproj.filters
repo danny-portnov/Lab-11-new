@@ -35,5 +35,11 @@
     <ClInclude Include="..\Lab 11\Triad.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Lab 10\Array.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lab 10\Triad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
