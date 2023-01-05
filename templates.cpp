@@ -158,7 +158,7 @@ void test_throw_string() {
 	{
 		cout << str << endl;
 	}
-	catch (outOfRange& oor)
+	catch (exception& oor)
 	{
 		cout << oor.what() << endl;
 	}
