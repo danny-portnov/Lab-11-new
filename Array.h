@@ -10,11 +10,22 @@ using namespace std;
 
 template <class T>
 class Array {
+
 public:
 	Array(int len = 10) : m_len(len), m_data(len ? (new T[len]) : NULL)
 	{
 		if (len)
-			memset(m_data, 0, len * sizeof(T)); //todo: check if we need to check this
+			for (int i = 0; i < m_len; i++)
+			{
+				m_data[i] = 0;
+			}
+	}
+	Array(const Array& otherArr) : m_len(otherArr.len()), m_data(m_len ? (new T[m_len]) : NULL) {
+
+		for (int i = 0; i < m_len; i++)
+		{
+			m_data[i] = otherArr[i];
+		}
 	}
 	~Array() { delete[] m_data; }
 	int len() const { return m_len; }
@@ -29,6 +40,24 @@ public:
 		}
 		os << endl;
 		return os;
+	}
+	friend bool operator<(const Array& firstArr, const Array& secondArray) {
+		if (firstArr.len() > secondArray.len()) {
+			return false;
+		}
+		else if (firstArr.len() < secondArray.len()) {
+			return true;
+		}
+		for (int i = 0; i < firstArr.len(); i++)
+		{
+			if (firstArr[i] < secondArray[i]) {
+				return true;
+			}
+			else if (firstArr[i] > secondArray[i]) {
+				return false;
+			}
+		}
+		return false;
 	}
 private:
 	int  m_len;

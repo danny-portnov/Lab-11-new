@@ -350,6 +350,24 @@ void test_cpp_array_of_Array() {
 	//cannot use the other one because this is a regular cpp array, its length isn't known
 }
 
+template <class T>
+void test_sort_array_of_Arrays(T initialValue) {
+	Array<T> a1(5);
+	Array<T> a2(5);
+	Array<T> aa[2] = { a1, a2 };
+	for (int i = 0; i < 5; i++) {
+		aa[0][i] = initialValue++;
+		aa[1][i] = initialValue++; //fill both arrays
+	}
+	print_array(aa[0]);
+	print_array(aa[1]);
+	cout << "before" << endl;
+	sort(aa, 2);
+	print_array(aa[0]);
+	print_array(aa[1]);
+	cout << "after" << endl;
+}
+
 //---------------------------------------------------------------------
 int main(void)
 {
@@ -374,6 +392,7 @@ int main(void)
 	test_swap_arrays<char>('a');
 
 	test_cpp_array_of_Array<int>();
+	test_sort_array_of_Arrays<int>(0);
 	cout << "Memory Leaks: " << _CrtDumpMemoryLeaks() << endl;
 
 	return 0;
