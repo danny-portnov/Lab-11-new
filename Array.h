@@ -14,11 +14,11 @@ class Array {
 public:
 	Array(int len = 10) : m_len(len), m_data(len ? (new T[len]) : NULL)
 	{
-		if (len)
+		/*if (len)
 			for (int i = 0; i < m_len; i++)
 			{
 				m_data[i] = 0;
-			}
+			}*/
 	}
 	Array(const Array& otherArr) : m_len(otherArr.len()), m_data(m_len ? (new T[m_len]) : NULL) {
 
@@ -58,6 +58,11 @@ public:
 			}
 		}
 		return false;
+	}
+
+	void fill_Array(T value) {
+		for (int i = 0; i < len(); i++)
+			m_data[i] = value;
 	}
 private:
 	int  m_len;

@@ -281,17 +281,16 @@ void test_old_sort_traid_arr() {
 template <class T>
 void test_new_print_Array(T initialValue) {
 	Array<T> a(8);
-	for (int i = 0; i < 8; i++)
-		a[i] = initialValue++;
+	a.fill_Array(initialValue);
 	cout << "Print The Array:\n";
 	print_array(a);
 }
 template <class T>
-void test_new_sort_Array(T initialValue) {
+void test_new_sort_Array(T value) {
 	//Sort a, and check "sorted" template for object with operator [] and len() method
 	Array<T> a(8);
-	for (int i = 0; i < 8; i++)
-		a[i] = initialValue++;
+	a.fill_Array(value);
+	a[7] = value + 1;
 	sort(a);
 	cout << "Print Sorted Array:\n";
 	print_array(a);
@@ -340,11 +339,12 @@ void test_throw_string() {
 		cout << out_of_range_exception.what() << endl;
 	}
 }
-
+#include <array>
 template <class T>
 void test_cpp_array_of_Array() {
 	Array<T> a1(5);
 	Array<T> a2(5);
+
 	Array<T> aa[2] = { a1, a2 };
 	print_array(aa, 2); //uses the second method! print_array(T* arr, int len);
 	//cannot use the other one because this is a regular cpp array, its length isn't known
@@ -355,10 +355,9 @@ void test_sort_array_of_Arrays(T initialValue) {
 	Array<T> a1(5);
 	Array<T> a2(5);
 	Array<T> aa[2] = { a1, a2 };
-	for (int i = 0; i < 5; i++) {
-		aa[0][i] = initialValue++;
-		aa[1][i] = initialValue++; //fill both arrays
-	}
+	aa[0].fill_Array(initialValue);
+	aa[1].fill_Array(initialValue);
+	aa[1][1] = 1;
 	print_array(aa[0]);
 	print_array(aa[1]);
 	cout << "before" << endl;
@@ -366,6 +365,20 @@ void test_sort_array_of_Arrays(T initialValue) {
 	print_array(aa[0]);
 	print_array(aa[1]);
 	cout << "after" << endl;
+}
+
+void test_Array_of_Array() {
+	Array< Array<int> > aai;
+	for (int i = 0; i < 10; i++) //default len for Array
+	{
+		aai[i].fill_Array(0);
+		aai[i][0] = i;
+	}
+	cout << "printing 10 Arrays" << endl;
+	print_array(aai);
+	sort(aai);
+	cout << "after sorting..." << endl;
+	print_array(aai);
 }
 
 //---------------------------------------------------------------------
@@ -393,6 +406,8 @@ int main(void)
 
 	test_cpp_array_of_Array<int>();
 	test_sort_array_of_Arrays<int>(0);
+
+	test_Array_of_Array();
 	cout << "Memory Leaks: " << _CrtDumpMemoryLeaks() << endl;
 
 	return 0;
